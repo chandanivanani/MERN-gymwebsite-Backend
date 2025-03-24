@@ -2,10 +2,12 @@ import { Request, Response } from 'express';
 import * as apiResponse from '../../helper/apiResponse';
 import UserModel from '../../models/userModel';
 import { encryptPass } from '../../helper/passEncDes';
+import { log } from 'console';
 
 const Signup = async (req: Request, res: Response): Promise<void> => {
     try {
-        const { firstname, lastname, email, password, gender, dob, height, weight, bio, profilePhoto } = req.body;
+        const { firstname, lastname, email, password,gender,dob,height,weight,bio,profilePhoto } = req.body;
+        // console.log(firstname);
 
         // Check if user already exists
         const existingUser = await UserModel.findOne({ email });
