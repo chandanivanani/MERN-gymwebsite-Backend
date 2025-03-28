@@ -28,9 +28,6 @@ const Login = async (req: Request, res: Response): Promise<void> => {
             return;
         }
 
-        // Generate Access Token (short-lived)
-        //  const accessToken = jwt.sign({ id: user._id }, jwtSecret, { expiresIn: '1d' });
-
         // Generate Refresh Token (long-lived)
         const refreshToken = jwt.sign({ id: user._id }, jwtRefreshSecret, { expiresIn: '7d' });
 

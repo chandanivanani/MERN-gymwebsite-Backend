@@ -20,7 +20,7 @@ app.use(cookieParser());
 app.use('/uploads',express.static('./uploads'))
 
 app.use('/api',indexroute)
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
     console.log(`Server is running on ${PORT}`)
