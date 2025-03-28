@@ -7,31 +7,35 @@ dotenv.config();
 const jwtSecret = process.env.JWT_SECRET;
 
 interface customRequest extends Request {
-    user?: string;
+    user? : string;
 }
 
-const verifyToken = (req:customRequest, res: Response, next: NextFunction) => {
+const verifyToken = (req:customRequest, res: Response, next: NextFunction): void => {
     try {
         const authHeader = req.headers.authorization;
         if(!authHeader){
-            return apiResponse.errorResponse(res, "Authorization header is missing");
+            apiResponse.errorResponse(res, "Authorization header is missing");
+            return;
         } 
         
         const token = authHeader.split(' ')[1];
         if(!token){
-            return apiResponse.errorResponse(res, "Token is missing");
+            apiResponse.errorResponse(res, "Token is missing");
+            return;
         }
 
         jwt.verify(token, jwtSecret as string ,(err:any, decoded:any) => {
             if (err) {
-                return apiResponse.unauthorizedResponse(res, "Token is not valid");
+                apiResponse.unauthorizedResponse(res, "Token is not valid");
+                return;
             }
 
             req.user = decoded.id;
             next();
         });
     } catch (error) {
-        return apiResponse.errorResponse(res, "Internal server error");
+        apiResponse.errorResponse(res, "Internal server error");
+        return;
     }
 };
 
