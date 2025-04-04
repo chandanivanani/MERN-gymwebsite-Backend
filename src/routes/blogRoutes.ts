@@ -1,11 +1,14 @@
 import express from "express"
+import verifyToken from "../middleware/tokenValidation";
+import addBlogController from "../controllers/Blog/addBlogController";
+import getAllBlogs from "../controllers/Blog/getAllBlogsController";
 
 const blog = express.Router();
 
-blog.post("/addblog")
-blog.get("/getblog")
-blog.get("/getblog/:id")
-blog.put("/updateblog/:id")
-blog.delete("/deleteblog/:id")
+blog.post("/addblog",verifyToken, addBlogController);
+blog.get("/getblog",verifyToken, getAllBlogs)
+blog.get("/getblog/:id",verifyToken)
+blog.put("/updateblog/:id",verifyToken)
+blog.delete("/deleteblog/:id",verifyToken)
 
 export default blog;

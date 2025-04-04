@@ -7,7 +7,7 @@ interface Blog extends Document {
     author:string;
     category:string;
     coverImg:string;
-    readTime:number;
+    readtime:number;
 }
 
 const blogSchema = new mongoose.Schema<Blog>({
@@ -17,7 +17,7 @@ const blogSchema = new mongoose.Schema<Blog>({
     author:{ type: String, required:true},
     category:{ type: String, required:true},
     coverImg:{ type: String, required:true},
-    readTime:{ type: Number, required:true }
+    readtime:{ type: Number, required:true }
 });
 
 const BlogModel = mongoose.model<Blog>('Blog',blogSchema);
